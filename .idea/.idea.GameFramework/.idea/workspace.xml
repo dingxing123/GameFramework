@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e9401f1c-6b90-480b-a8be-4c1357041615" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/GameFramework/DataTable/DataTableBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameFramework/DataTable/DataTableBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFramework/GameFramework.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GameFramework/GameFramework.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFramework/Resource/ResourceManager.ResourceLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameFramework/Resource/ResourceManager.ResourceLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFramework/Sound/SoundManager.SoundGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameFramework/Sound/SoundManager.SoundGroup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFramework/UI/IUIForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameFramework/UI/IUIForm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFramework/UI/IUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameFramework/UI/IUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameFramework/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameFramework/UI/UIManager.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/Resource/ResourceManager.ResourceLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/Resource/ResourceManager.ResourceLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/Resource/ResourceManager.ResourceLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/UI/IUIForm.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/Resource/ResourceManager.ResourceLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/Sound/SoundManager.SoundGroup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/Sound/SoundManager.SoundGroup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/Resource/ResourceManager.ResourceLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/UI/IUIForm.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/Resource/ResourceManager.ResourceLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Code_GIT/github-dingxing/GameFramework/GameFramework/Resource/ResourceManager.ResourceLoader.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/GameFramework/DataTable/DataTableBase.cs" />
+        <option value="$PROJECT_DIR$/GameFramework/Resource/DecryptResourceCallback.cs" />
+        <option value="$PROJECT_DIR$/GameFramework/Sound/SoundManager.SoundGroup.cs" />
+        <option value="$PROJECT_DIR$/GameFramework/UI/IUIForm.cs" />
+        <option value="$PROJECT_DIR$/GameFramework/UI/IUIManager.cs" />
+        <option value="$PROJECT_DIR$/GameFramework/UI/UIManager.cs" />
+        <option value="$PROJECT_DIR$/GameFramework/Resource/ResourceManager.ResourceLoader.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1iAhsUXuBs7fB8oJLGR3YcY074F" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e9401f1c-6b90-480b-a8be-4c1357041615" name="Default Changelist" comment="" />
+      <created>1601356511198</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601356511198</updated>
+      <workItem from="1601356519053" duration="5595000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1241" y="289" key="RollbackChangesDialog" timestamp="1601359070439">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1241" y="289" key="RollbackChangesDialog/0.0.1920.1160/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1601359070439" />
+    <state x="-1463" y="224" key="SettingsEditor" timestamp="1601362702409">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1463" y="224" key="SettingsEditor/0.0.1920.1160/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1601362702409" />
+  </component>
+</project>

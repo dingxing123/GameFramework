@@ -246,7 +246,7 @@ namespace GameFramework.DataTable
         /// </summary>
         /// <param name="id">数据表行的编号。</param>
         /// <returns>是否存在数据表行。</returns>
-        public abstract bool HasDataRow(int id);
+        public abstract bool HasDataRow(long id);
 
         /// <summary>
         /// 增加数据表行。
@@ -271,7 +271,7 @@ namespace GameFramework.DataTable
         /// </summary>
         /// <param name="id">要移除数据表行的编号。</param>
         /// <returns>是否移除数据表行成功。</returns>
-        public abstract bool RemoveDataRow(int id);
+        public abstract bool RemoveDataRow(long id);
 
         /// <summary>
         /// 清空所有数据表行。

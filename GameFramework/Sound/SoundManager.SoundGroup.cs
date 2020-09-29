@@ -267,7 +267,7 @@ namespace GameFramework.Sound
             /// <summary>
             /// 恢复播放所有声音。
             /// </summary>
-            /// <param name="fadeOutSeconds">声音淡出时间，以秒为单位。</param>
+            /// <param name="fadeInSeconds">声音淡出时间，以秒为单位。</param>
             /// <returns>是否恢复播放声音成功。</returns>
             public bool ResumeAllSound(float fadeInSeconds)
             {

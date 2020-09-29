@@ -88,12 +88,15 @@ namespace GameFramework.UI
         /// 界面打开。
         /// </summary>
         /// <param name="userData">用户自定义数据。</param>
+        /// <param name="uiFormId">界面Id</param>
         void OnOpen(object userData, int uiFormId);
         
         /// <summary>
         /// 界面打开。
         /// </summary>
         /// <param name="userData">用户自定义数据。</param>
+        /// <param name="uiFormId">界面Id</param>
+        /// <param name="isRegister">是否注册</param>
         void OnOpen(object userData, int uiFormId, bool isRegister);
         
         #endregion

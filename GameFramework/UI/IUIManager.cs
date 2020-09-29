@@ -301,17 +301,19 @@ namespace GameFramework.UI
         /// <param name="priority">加载界面资源的优先级。</param>
         /// <param name="pauseCoveredUIForm">是否暂停被覆盖的界面。</param>
         /// <param name="userData">用户自定义数据。</param>
+        /// <param name="uiFormId">界面Id</param>
         /// <returns>界面的序列编号。</returns>
         int OpenUIForm(string uiFormAssetName, string uiGroupName, int priority, bool pauseCoveredUIForm, object userData, int uiFormId);
 
         /// <summary>
         /// 注册界面
         /// </summary>
-        /// <param name="uiFormAssetName"></param>
-        /// <param name="uiGroupName"></param>
-        /// <param name="priority"></param>
-        /// <param name="pauseCoveredUIForm"></param>
-        /// <param name="userData"></param>
+        /// <param name="uiFormAssetName">界面资源名称。</param>
+        /// <param name="uiGroupName">界面组名称。</param>
+        /// <param name="priority">加载界面资源的优先级。</param>
+        /// <param name="pauseCoveredUIForm">是否暂停被覆盖的界面。</param>
+        /// <param name="userData">用户自定义数据。</param>
+        /// <param name="uiFormId">界面Id</param>
         void RegisterUIForm(string uiFormAssetName, string uiGroupName, int priority, bool pauseCoveredUIForm, object userData, int uiFormId);
 
         /// <summary>

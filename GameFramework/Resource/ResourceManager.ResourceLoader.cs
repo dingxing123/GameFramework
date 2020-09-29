@@ -360,54 +360,71 @@ namespace GameFramework.Resource
             /// 同步加载资源。
             /// </summary>
             /// <param name="assetName">要加载资源的名称。</param>
-            /// <param name="subName">要加载子资源的名称。</param>
+            /// <param name="subAssetName">要加载子资源的名称。</param>
             /// <param name="syncAssetBundleCallback">同步加载AssetBundle回调。</param>
             /// <param name="syncAssetObjectCallback">同步加载AssetObject回调。</param>
             /// <returns></returns>
-            public object LoadAssetSync(string assetName, string subName, SyncAssetBundleCallback syncAssetBundleCallback, SyncAssetObjectCallback syncAssetObjectCallbac)
+            public object LoadAssetSync(string assetName, string subAssetName, SyncAssetBundleCallback syncAssetBundleCallback, SyncAssetObjectCallback syncAssetObjectCallback)
             {
                 ResourceInfo resourceInfo = null;
                 string[] dependencyAssetNames = null;
+                var dependencyAssets = new List<object>();
 
                 if (!CheckAsset(assetName, out resourceInfo, out dependencyAssetNames))
                 {
                     throw new GameFrameworkException(Utility.Text.Format("Can not load asset sync '{0}'.", assetName));
                 }
 
-                List<object> dependencyAssets = new List<object>();
-                foreach (string dependencyAssetName in dependencyAssetNames)
+                foreach (var dependencyAssetName in dependencyAssetNames)
                 {
-                    object item = LoadAssetSync(dependencyAssetName, null, syncAssetBundleCallback, syncAssetObjectCallbac);
+                    var item = LoadAssetSync(dependencyAssetName, null, syncAssetBundleCallback, syncAssetObjectCallback);
                     dependencyAssets.Add(item);
                 }
 
-                string name = string.IsNullOrEmpty(subName) ? assetName : (assetName + "+" + subName);
-                AssetObject assetObject = m_AssetPool.Spawn(name);
+                var name = string.IsNullOrEmpty(subAssetName) ? assetName : (assetName + "+" + subAssetName);
+                var assetObject = m_AssetPool.Spawn(name);
                 if (assetObject != null)
                 {
                     return assetObject.Target;
                 }
 
-                ResourceObject resourceObject = m_ResourcePool.Spawn(resourceInfo.ResourceName.Name);
+                var resourceObject = m_ResourcePool.Spawn(resourceInfo.ResourceName.Name);
                 if (resourceObject == null)
                 {
-                    string path = Path.Combine(resourceInfo.StorageInReadOnly ? m_ResourceManager.m_ReadOnlyPath : m_ResourceManager.m_ReadWritePath, resourceInfo.ResourceName.FullName);
+                    var bundlePath = Path.Combine(resourceInfo.StorageInReadOnly ? m_ResourceManager.m_ReadOnlyPath : m_ResourceManager.m_ReadWritePath, resourceInfo.ResourceName.FullName);
+                    
                     object assetBundle = null;
-                    LoadType loadType = resourceInfo.LoadType;
+                    var loadType = resourceInfo.LoadType;
                     if (loadType == LoadType.LoadFromFile)
                     {
-                        assetBundle = syncAssetBundleCallback(path, null);
+                        assetBundle = syncAssetBundleCallback(bundlePath, null);
                     }
                     else
                     {
-                        byte[] bytes = File.ReadAllBytes(path);
-                        switch (loadType)
+                        IFileSystem fileSystem = m_ResourceManager.GetFileSystem(resourceInfo.FileSystemName, resourceInfo.StorageInReadOnly);
+                        byte[] bytes = fileSystem.ReadFile(resourceInfo.ResourceName.FullName);
+                        if (bytes == null)
                         {
-                            case LoadType.LoadFromMemoryAndQuickDecrypt:
-                            case LoadType.LoadFromMemoryAndDecrypt:
-                                bytes = m_ResourceManager.m_DecryptResourceCallback(resourceInfo.ResourceName.Name, resourceInfo.ResourceName.Variant, (byte)loadType, resourceInfo.Length, resourceInfo.HashCode, resourceInfo.StorageInReadOnly, bytes);
-                                break;
+                            return null;
                         }
+
+                        if (resourceInfo.LoadType == LoadType.LoadFromMemoryAndQuickDecrypt ||
+                            resourceInfo.LoadType == LoadType.LoadFromMemoryAndDecrypt)
+                        {
+                            DecryptResourceCallback decryptResourceCallback = m_ResourceManager.m_DecryptResourceCallback ?? DefaultDecryptResourceCallback;
+                            decryptResourceCallback(bytes, 0, bytes.Length, resourceInfo.ResourceName.Name, resourceInfo.ResourceName.Variant, 
+                                resourceInfo.ResourceName.Extension, resourceInfo.StorageInReadOnly, resourceInfo.FileSystemName, (byte)resourceInfo.LoadType, resourceInfo.Length, resourceInfo.HashCode);
+                        }
+
+                        // var bytes = File.ReadAllBytes(bundlePath);
+                        // switch (loadType)
+                        // {
+                        //     case LoadType.LoadFromMemoryAndQuickDecrypt:
+                        //     case LoadType.LoadFromMemoryAndDecrypt:
+                        //         bytes = m_ResourceManager.m_DecryptResourceCallback(null,0,1, resourceInfo.ResourceName.Name, resourceInfo.ResourceName.Variant, 
+                        //             (byte)loadType, resourceInfo.Length, resourceInfo.HashCode, resourceInfo.StorageInReadOnly, bytes);
+                        //         break;
+                        // }
                         assetBundle = syncAssetBundleCallback(null, bytes);
                     }
                     resourceObject = ResourceObject.Create(resourceInfo.ResourceName.Name, assetBundle, m_ResourceManager.m_ResourceHelper, this);
@@ -416,13 +433,13 @@ namespace GameFramework.Resource
 
                 if (resourceObject == null)
                 {
-                    throw new GameFrameworkException(Utility.Text.Format("Can not load asset '{0}' sub '{1}' without AssetBundle '{2}'.", assetName, subName, resourceInfo.ResourceName.Name));
+                    throw new GameFrameworkException(Utility.Text.Format("Can not load asset '{0}' sub '{1}' without AssetBundle '{2}'.", assetName, subAssetName, resourceInfo.ResourceName.Name));
                 }
 
-                object target = syncAssetObjectCallbac(resourceObject.Target, assetName, subName);
+                object target = syncAssetObjectCallback(resourceObject.Target, assetName, subAssetName);
                 if (target == null)
                 {
-                    throw new GameFrameworkException(Utility.Text.Format("Can not load asset '{0}' sub '{1}' without AssetObject '{2}'.", assetName, subName, resourceInfo.ResourceName.Name));
+                    throw new GameFrameworkException(Utility.Text.Format("Can not load asset '{0}' sub '{1}' without AssetObject '{2}'.", assetName, subAssetName, resourceInfo.ResourceName.Name));
                 }
                 
                 assetObject = AssetObject.Create(name, target, dependencyAssets, resourceObject.Target, m_ResourceManager.m_ResourceHelper, this);

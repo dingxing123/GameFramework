@@ -277,6 +277,8 @@
     <Compile Include="Resource\ResourceUpdateFailureEventArgs.cs" />
     <Compile Include="Resource\ResourceUpdateStartEventArgs.cs" />
     <Compile Include="Resource\ResourceUpdateSuccessEventArgs.cs" />
+    <Compile Include="Resource\SyncAssetBundleCallback.cs" />
+    <Compile Include="Resource\SyncAssetObjectCallback.cs" />
     <Compile Include="Resource\UnloadSceneCallbacks.cs" />
     <Compile Include="Resource\UnloadSceneFailureCallback.cs" />
     <Compile Include="Resource\UnloadSceneSuccessCallback.cs" />
