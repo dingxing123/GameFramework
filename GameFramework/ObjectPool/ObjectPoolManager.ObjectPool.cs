@@ -237,6 +237,22 @@ namespace GameFramework.ObjectPool
             }
 
             /// <summary>
+            /// 获取对象数量。
+            /// </summary>
+            /// <param name="name"></param>
+            /// <returns></returns>
+            public int ObjectCount(string name)
+            {
+                GameFrameworkLinkedListRange<Object<T>> objectRange = default(GameFrameworkLinkedListRange<Object<T>>);
+                if (m_Objects.TryGetValue(name, out objectRange))
+                {
+                    return objectRange.Count;
+                }
+
+                return 0;
+            }
+            
+            /// <summary>
             /// 获取对象。
             /// </summary>
             /// <returns>要获取的对象。</returns>

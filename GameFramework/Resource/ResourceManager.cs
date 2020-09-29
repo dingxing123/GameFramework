@@ -1400,6 +1400,49 @@ namespace GameFramework.Resource
 
             m_ResourceLoader.LoadAsset(assetName, assetType, priority, loadAssetCallbacks, userData);
         }
+        
+        #region Modify By cpd
+
+        /// <summary>
+        /// 同步加载资源。
+        /// </summary>
+        /// <param name="assetName">要加载资源的名称。</param>
+        /// <param name="subName">要加载子资源的名称。</param>
+        /// <param name="syncAssetBundleCallback">同步加载AssetBundle回调。</param>
+        /// <param name="syncAssetObjectCallback">同步加载AssetObject回调。</param>
+        /// <returns></returns>
+        public object LoadAssetSync(string assetName, string subName, SyncAssetBundleCallback syncAssetBundleCallback, SyncAssetObjectCallback syncAssetObjectCallback)
+        {
+            if (string.IsNullOrEmpty(assetName))
+            {
+                throw new GameFrameworkException("Asset name is invalid.");
+            }
+            if (syncAssetBundleCallback == null)
+            {
+                throw new GameFrameworkException("Sync Asset Bundle callback is invalid.");
+            }
+            if (syncAssetObjectCallback == null)
+            {
+                throw new GameFrameworkException("Sync Asset Object callback is invalid.");
+            }
+            return m_ResourceLoader.LoadAssetSync(assetName, subName, syncAssetBundleCallback, syncAssetObjectCallback);
+        }
+        
+        /// <summary>
+        /// 清理资源
+        /// </summary>
+        public void Clean()
+        {
+            m_AssetInfos.Clear();
+            m_ResourceInfos.Clear();
+            m_ResourceGroups.Clear();
+            m_ReadWriteResourceInfos.Clear();
+
+            m_ResourceMode = ResourceMode.Unspecified;
+            m_RefuseSetCurrentVariant = false;
+        }
+
+        #endregion
 
         /// <summary>
         /// 卸载资源。

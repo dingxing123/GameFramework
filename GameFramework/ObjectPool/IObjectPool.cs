@@ -132,6 +132,17 @@ namespace GameFramework.ObjectPool
         /// <returns>要获取的对象。</returns>
         T Spawn(string name);
 
+        #region Modify By cpd
+
+        /// <summary>
+        /// 获取对象数量。
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        int ObjectCount(string name);
+
+        #endregion
+        
         /// <summary>
         /// 回收对象。
         /// </summary>

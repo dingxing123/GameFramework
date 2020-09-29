@@ -15,6 +15,7 @@ namespace GameFramework.UI
             private UIGroup m_UIGroup;
             private bool m_PauseCoveredUIForm;
             private object m_UserData;
+            private int m_UIFormId; // Modify By cpd
 
             public OpenUIFormInfo()
             {
@@ -22,6 +23,7 @@ namespace GameFramework.UI
                 m_UIGroup = null;
                 m_PauseCoveredUIForm = false;
                 m_UserData = null;
+                m_UIFormId = 0; // Modify By cpd
             }
 
             public int SerialId
@@ -65,6 +67,25 @@ namespace GameFramework.UI
                 openUIFormInfo.m_UserData = userData;
                 return openUIFormInfo;
             }
+
+            #region Modify By cpd
+
+            public int UIFormId
+            {
+                get
+                {
+                    return m_UIFormId;
+                }
+            }
+            
+            public static OpenUIFormInfo Create(int serialId, UIGroup uiGroup, bool pauseCoveredUIForm, object userData, int uiFormId)
+            {
+                OpenUIFormInfo openUIFormInfo = Create(serialId, uiGroup, pauseCoveredUIForm, userData);
+                openUIFormInfo.m_UIFormId = uiFormId;
+                return openUIFormInfo;
+            }
+            
+            #endregion
 
             public void Clear()
             {

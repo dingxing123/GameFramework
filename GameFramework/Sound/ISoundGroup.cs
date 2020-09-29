@@ -64,6 +64,20 @@ namespace GameFramework.Sound
         }
 
         /// <summary>
+        /// 暂停播放所有声音。
+        /// </summary>
+        /// <param name="fadeOutSeconds"></param>
+        /// <returns></returns>
+        bool PauseAllSound(float fadeOutSeconds);
+
+        /// <summary>
+        /// 恢复播放所有声音。
+        /// </summary>
+        /// <param name="fadeInSeconds"></param>
+        /// <returns></returns>
+        bool ResumeAllSound(float fadeInSeconds);
+
+        /// <summary>
         /// 停止所有已加载的声音。
         /// </summary>
         void StopAllLoadedSounds();

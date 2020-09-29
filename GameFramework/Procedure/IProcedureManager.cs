@@ -77,5 +77,18 @@ namespace GameFramework.Procedure
         /// <param name="procedureType">要获取的流程类型。</param>
         /// <returns>要获取的流程。</returns>
         ProcedureBase GetProcedure(Type procedureType);
+
+        #region Modify By cpd
+
+        /// <summary>
+        /// 获取流程状态机。
+        /// </summary>
+        /// <returns></returns>
+        IFsm<IProcedureManager> CurrentProcedureFsm
+        {
+            get;
+        }
+
+        #endregion
     }
 }

@@ -200,5 +200,26 @@ namespace GameFramework.Procedure
 
             return (ProcedureBase)m_ProcedureFsm.GetState(procedureType);
         }
+
+        #region Modify By cpd
+        
+        /// <summary>
+        /// 获取流程状态机。
+        /// </summary>
+        /// <exception cref="GameFrameworkException"></exception>
+        public IFsm<IProcedureManager> CurrentProcedureFsm
+        {
+            get
+            {
+                if (m_ProcedureFsm == null)
+                {
+                    throw new GameFrameworkException("You must initialize procedure first.");
+                }
+
+                return m_ProcedureFsm;
+            }
+        }
+        
+        #endregion
     }
 }

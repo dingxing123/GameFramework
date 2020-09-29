@@ -15,7 +15,7 @@ namespace GameFramework.DataTable
         /// <summary>
         /// 获取数据表行的编号。
         /// </summary>
-        int Id
+        long Id
         {
             get;
         }

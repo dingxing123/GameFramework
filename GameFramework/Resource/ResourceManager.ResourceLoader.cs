@@ -342,6 +342,95 @@ namespace GameFramework.Resource
                 }
             }
 
+            #region Modify By cpd
+            
+            /// <summary>
+            /// 同步加载资源。
+            /// </summary>
+            /// <param name="assetName">要加载资源的名称。</param>
+            /// <param name="subName">要加载子资源的名称。</param>
+            /// <param name="syncAssetBundleCallback">同步加载AssetBundle回调。</param>
+            /// <param name="syncAssetObjectCallback">同步加载AssetObject回调。</param>
+            /// <returns></returns>
+            public object LoadAssetSync(string assetName, string subName, SyncAssetBundleCallback syncAssetBundleCallback, SyncAssetObjectCallback syncAssetObjectCallbac)
+            {
+                ResourceInfo resourceInfo = null;
+                string[] dependencyAssetNames = null;
+
+                if (!CheckAsset(assetName, out resourceInfo, out dependencyAssetNames))
+                {
+                    throw new GameFrameworkException(Utility.Text.Format("Can not load asset sync '{0}'.", assetName));
+                }
+
+                List<object> dependencyAssets = new List<object>();
+                foreach (string dependencyAssetName in dependencyAssetNames)
+                {
+                    object item = LoadAssetSync(dependencyAssetName, null, syncAssetBundleCallback, syncAssetObjectCallbac);
+                    dependencyAssets.Add(item);
+                }
+
+                string name = string.IsNullOrEmpty(subName) ? assetName : (assetName + "+" + subName);
+                AssetObject assetObject = m_AssetPool.Spawn(name);
+                if (assetObject != null)
+                {
+                    return assetObject.Target;
+                }
+
+                ResourceObject resourceObject = m_ResourcePool.Spawn(resourceInfo.ResourceName.Name);
+                if (resourceObject == null)
+                {
+                    string path = Path.Combine(resourceInfo.StorageInReadOnly ? m_ResourceManager.m_ReadOnlyPath : m_ResourceManager.m_ReadWritePath, resourceInfo.ResourceName.FullName);
+                    object assetBundle = null;
+                    LoadType loadType = resourceInfo.LoadType;
+                    if (loadType == LoadType.LoadFromFile)
+                    {
+                        assetBundle = syncAssetBundleCallback(path, null);
+                    }
+                    else
+                    {
+                        byte[] bytes = File.ReadAllBytes(path);
+                        switch (loadType)
+                        {
+                            case LoadType.LoadFromMemoryAndQuickDecrypt:
+                            case LoadType.LoadFromMemoryAndDecrypt:
+                                bytes = m_ResourceManager.m_DecryptResourceCallback(resourceInfo.ResourceName.Name, resourceInfo.ResourceName.Variant, (byte)loadType, resourceInfo.Length, resourceInfo.HashCode, resourceInfo.StorageInReadOnly, bytes);
+                                break;
+                        }
+                        assetBundle = syncAssetBundleCallback(null, bytes);
+                    }
+                    resourceObject = ResourceObject.Create(resourceInfo.ResourceName.Name, assetBundle, m_ResourceManager.m_ResourceHelper, this);
+                    m_ResourcePool.Register(resourceObject, true);
+                }
+
+                if (resourceObject == null)
+                {
+                    throw new GameFrameworkException(Utility.Text.Format("Can not load asset '{0}' sub '{1}' without AssetBundle '{2}'.", assetName, subName, resourceInfo.ResourceName.Name));
+                }
+
+                object target = syncAssetObjectCallbac(resourceObject.Target, assetName, subName);
+                if (target == null)
+                {
+                    throw new GameFrameworkException(Utility.Text.Format("Can not load asset '{0}' sub '{1}' without AssetObject '{2}'.", assetName, subName, resourceInfo.ResourceName.Name));
+                }
+                
+                assetObject = AssetObject.Create(name, target, dependencyAssets, resourceObject.Target, m_ResourceManager.m_ResourceHelper, this);
+                m_AssetPool.Register(assetObject, true);
+                m_AssetToResourceMap.Add(target, resourceObject.Target);
+                foreach (object dependencyAsset in dependencyAssets)
+                {
+                    object dependencyResource;
+                    if (!m_AssetToResourceMap.TryGetValue(dependencyAsset, out dependencyResource))
+                    {
+                        throw new GameFrameworkException("Can not find dependency resource.");
+                    }
+                    resourceObject.AddDependencyResource(dependencyResource);
+                }
+
+                return assetObject.Target;
+            }
+
+            #endregion
+
             /// <summary>
             /// 卸载资源。
             /// </summary>

@@ -19,10 +19,17 @@ namespace GameFramework
         {
             private static readonly System.Reflection.Assembly[] s_Assemblies = null;
             private static readonly Dictionary<string, Type> s_CachedTypes = new Dictionary<string, Type>();
+            private static readonly Dictionary<string, System.Reflection.Assembly> s_Name2Assembly = new Dictionary<string, System.Reflection.Assembly>(); // Modify By cpd
 
             static Assembly()
             {
                 s_Assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                
+                // Modify By cpd
+                foreach (var assembly in s_Assemblies)
+                {
+                    s_Name2Assembly.Add(assembly.FullName.Split(',')[0], assembly);
+                }
             }
 
             /// <summary>
@@ -100,6 +107,47 @@ namespace GameFramework
                         s_CachedTypes.Add(typeName, type);
                         return type;
                     }
+                }
+
+                return null;
+            }
+            
+            /// <summary>
+            /// 获取已加载的程序集中的指定类型。
+            /// </summary>
+            /// <param name="typeName">要获取的类型名</param>
+            /// <param name="assemblyName">程序集名称</param>
+            /// <returns></returns>
+            public static Type GetType(string typeName, string assemblyName)
+            {
+                if (string.IsNullOrEmpty(typeName))
+                {
+                    throw new GameFrameworkException("Type name is invalid.");
+                }
+
+                Type type = null;
+                if (s_CachedTypes.TryGetValue(typeName, out type))
+                {
+                    return type;
+                }
+
+                type = Type.GetType(typeName);
+                if (type != null)
+                {
+                    s_CachedTypes.Add(typeName, type);
+                    return type;
+                }
+
+                if (string.IsNullOrEmpty(assemblyName))
+                {
+                    throw new GameFrameworkException("Assembly name is invalid.");
+                }
+
+                System.Reflection.Assembly assembly = null;
+                if (s_Name2Assembly.TryGetValue(assemblyName, out assembly))
+                {
+                    type = Type.GetType(Text.Format("{0}, {1}", typeName, assembly.FullName));
+                    return type;
                 }
 
                 return null;

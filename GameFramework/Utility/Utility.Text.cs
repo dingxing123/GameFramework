@@ -17,8 +17,7 @@ namespace GameFramework
         /// </summary>
         public static class Text
         {
-            [ThreadStatic]
-            private static StringBuilder s_CachedStringBuilder = null;
+            [ThreadStatic] private static StringBuilder s_CachedStringBuilder = null;
 
             /// <summary>
             /// 获取格式化字符串。
@@ -110,6 +109,34 @@ namespace GameFramework
                 {
                     s_CachedStringBuilder = new StringBuilder(1024);
                 }
+            }
+
+            /// <summary>
+            /// 根据类型和名称获取完整名称。
+            /// </summary>
+            /// <typeparam name="T">类型。</typeparam>
+            /// <param name="name">名称。</param>
+            /// <returns>完整名称。</returns>
+            public static string GetFullName<T>(string name)
+            {
+                return GetFullName(typeof(T), name);
+            }
+
+            /// <summary>
+            /// 根据类型和名称获取完整名称。
+            /// </summary>
+            /// <param name="type">类型。</param>
+            /// <param name="name">名称。</param>
+            /// <returns>完整名称。</returns>
+            public static string GetFullName(Type type, string name)
+            {
+                if (type == null)
+                {
+                    throw new GameFrameworkException("Type is invalid.");
+                }
+
+                string typeName = type.FullName;
+                return string.IsNullOrEmpty(name) ? typeName : Format("{0}.{1}", typeName, name);
             }
         }
     }

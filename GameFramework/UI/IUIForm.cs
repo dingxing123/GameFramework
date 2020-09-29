@@ -82,6 +82,22 @@ namespace GameFramework.UI
         /// <param name="userData">用户自定义数据。</param>
         void OnOpen(object userData);
 
+        #region Modify By cpd
+        
+        /// <summary>
+        /// 界面打开。
+        /// </summary>
+        /// <param name="userData">用户自定义数据。</param>
+        void OnOpen(object userData, int uiFormId);
+        
+        /// <summary>
+        /// 界面打开。
+        /// </summary>
+        /// <param name="userData">用户自定义数据。</param>
+        void OnOpen(object userData, int uiFormId, bool isRegister);
+        
+        #endregion
+        
         /// <summary>
         /// 界面关闭。
         /// </summary>

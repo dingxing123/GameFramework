@@ -20,46 +20,27 @@ namespace GameFramework.UI
         /// <summary>
         /// 获取界面组数量。
         /// </summary>
-        int UIGroupCount
-        {
-            get;
-        }
+        int UIGroupCount { get; }
 
         /// <summary>
         /// 获取或设置界面实例对象池自动释放可释放对象的间隔秒数。
         /// </summary>
-        float InstanceAutoReleaseInterval
-        {
-            get;
-            set;
-        }
+        float InstanceAutoReleaseInterval { get; set; }
 
         /// <summary>
         /// 获取或设置界面实例对象池的容量。
         /// </summary>
-        int InstanceCapacity
-        {
-            get;
-            set;
-        }
+        int InstanceCapacity { get; set; }
 
         /// <summary>
         /// 获取或设置界面实例对象池对象过期秒数。
         /// </summary>
-        float InstanceExpireTime
-        {
-            get;
-            set;
-        }
+        float InstanceExpireTime { get; set; }
 
         /// <summary>
         /// 获取或设置界面实例对象池的优先级。
         /// </summary>
-        int InstancePriority
-        {
-            get;
-            set;
-        }
+        int InstancePriority { get; set; }
 
         /// <summary>
         /// 打开界面成功事件。
@@ -309,6 +290,36 @@ namespace GameFramework.UI
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>界面的序列编号。</returns>
         int OpenUIForm(string uiFormAssetName, string uiGroupName, int priority, bool pauseCoveredUIForm, object userData);
+
+        #region Modify By cpd
+
+        /// <summary>
+        /// 打开界面。
+        /// </summary>
+        /// <param name="uiFormAssetName">界面资源名称。</param>
+        /// <param name="uiGroupName">界面组名称。</param>
+        /// <param name="priority">加载界面资源的优先级。</param>
+        /// <param name="pauseCoveredUIForm">是否暂停被覆盖的界面。</param>
+        /// <param name="userData">用户自定义数据。</param>
+        /// <returns>界面的序列编号。</returns>
+        int OpenUIForm(string uiFormAssetName, string uiGroupName, int priority, bool pauseCoveredUIForm, object userData, int uiFormId);
+
+        /// <summary>
+        /// 注册界面
+        /// </summary>
+        /// <param name="uiFormAssetName"></param>
+        /// <param name="uiGroupName"></param>
+        /// <param name="priority"></param>
+        /// <param name="pauseCoveredUIForm"></param>
+        /// <param name="userData"></param>
+        void RegisterUIForm(string uiFormAssetName, string uiGroupName, int priority, bool pauseCoveredUIForm, object userData, int uiFormId);
+
+        /// <summary>
+        /// 释放所有未使用的界面。
+        /// </summary>
+        void ReleaseAllUnusedUIForm();
+
+        #endregion
 
         /// <summary>
         /// 关闭界面。

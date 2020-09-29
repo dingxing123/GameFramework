@@ -19,67 +19,46 @@ namespace GameFramework.DataTable
         /// <summary>
         /// 获取数据表名称。
         /// </summary>
-        string Name
-        {
-            get;
-        }
+        string Name { get; }
 
         /// <summary>
         /// 获取数据表完整名称。
         /// </summary>
-        string FullName
-        {
-            get;
-        }
+        string FullName { get; }
 
         /// <summary>
         /// 获取数据表行的类型。
         /// </summary>
-        Type Type
-        {
-            get;
-        }
+        Type Type { get; }
 
         /// <summary>
         /// 获取数据表行数。
         /// </summary>
-        int Count
-        {
-            get;
-        }
+        int Count { get; }
 
         /// <summary>
         /// 获取数据表行。
         /// </summary>
         /// <param name="id">数据表行的编号。</param>
         /// <returns>数据表行。</returns>
-        T this[int id]
-        {
-            get;
-        }
+        T this[long id] { get; }
 
         /// <summary>
         /// 获取编号最小的数据表行。
         /// </summary>
-        T MinIdDataRow
-        {
-            get;
-        }
+        T MinIdDataRow { get; }
 
         /// <summary>
         /// 获取编号最大的数据表行。
         /// </summary>
-        T MaxIdDataRow
-        {
-            get;
-        }
+        T MaxIdDataRow { get; }
 
         /// <summary>
         /// 检查是否存在数据表行。
         /// </summary>
         /// <param name="id">数据表行的编号。</param>
         /// <returns>是否存在数据表行。</returns>
-        bool HasDataRow(int id);
+        bool HasDataRow(long id);
 
         /// <summary>
         /// 检查是否存在数据表行。
@@ -93,7 +72,7 @@ namespace GameFramework.DataTable
         /// </summary>
         /// <param name="id">数据表行的编号。</param>
         /// <returns>数据表行。</returns>
-        T GetDataRow(int id);
+        T GetDataRow(long id);
 
         /// <summary>
         /// 获取符合条件的数据表行。
@@ -172,7 +151,7 @@ namespace GameFramework.DataTable
         /// </summary>
         /// <param name="id">要移除数据表行的编号。</param>
         /// <returns>是否移除数据表行成功。</returns>
-        bool RemoveDataRow(int id);
+        bool RemoveDataRow(long id);
 
         /// <summary>
         /// 清空所有数据表行。

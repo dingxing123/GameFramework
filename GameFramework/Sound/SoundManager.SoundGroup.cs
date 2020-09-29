@@ -247,6 +247,38 @@ namespace GameFramework.Sound
 
                 return false;
             }
+            
+            /// <summary>
+            /// 暂停播放所有声音。
+            /// </summary>
+            /// <param name="fadeOutSeconds">声音淡出时间，以秒为单位。</param>
+            /// <returns>是否暂停播放声音成功。</returns>
+            public bool PauseAllSound(float fadeOutSeconds)
+            {
+                foreach (SoundAgent soundAgent in m_SoundAgents)
+                {
+                    soundAgent.Pause(fadeOutSeconds);
+                    return true;
+                }
+
+                return false;
+            }
+            
+            /// <summary>
+            /// 恢复播放所有声音。
+            /// </summary>
+            /// <param name="fadeOutSeconds">声音淡出时间，以秒为单位。</param>
+            /// <returns>是否恢复播放声音成功。</returns>
+            public bool ResumeAllSound(float fadeInSeconds)
+            {
+                foreach (SoundAgent soundAgent in m_SoundAgents)
+                {
+                    soundAgent.Resume(fadeInSeconds);
+                    return true;
+                }
+
+                return false;
+            }
 
             /// <summary>
             /// 恢复播放声音。

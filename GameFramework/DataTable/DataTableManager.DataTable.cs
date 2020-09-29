@@ -19,7 +19,7 @@ namespace GameFramework.DataTable
         /// <typeparam name="T">数据表行的类型。</typeparam>
         private sealed class DataTable<T> : DataTableBase, IDataTable<T> where T : class, IDataRow, new()
         {
-            private readonly Dictionary<int, T> m_DataSet;
+            private readonly Dictionary<long, T> m_DataSet;
             private T m_MinIdDataRow;
             private T m_MaxIdDataRow;
 
@@ -30,7 +30,7 @@ namespace GameFramework.DataTable
             public DataTable(string name)
                 : base(name)
             {
-                m_DataSet = new Dictionary<int, T>();
+                m_DataSet = new Dictionary<long, T>();
                 m_MinIdDataRow = null;
                 m_MaxIdDataRow = null;
             }
@@ -40,10 +40,7 @@ namespace GameFramework.DataTable
             /// </summary>
             public override Type Type
             {
-                get
-                {
-                    return typeof(T);
-                }
+                get { return typeof(T); }
             }
 
             /// <summary>
@@ -51,10 +48,7 @@ namespace GameFramework.DataTable
             /// </summary>
             public override int Count
             {
-                get
-                {
-                    return m_DataSet.Count;
-                }
+                get { return m_DataSet.Count; }
             }
 
             /// <summary>
@@ -62,12 +56,9 @@ namespace GameFramework.DataTable
             /// </summary>
             /// <param name="id">数据表行的编号。</param>
             /// <returns>数据表行。</returns>
-            public T this[int id]
+            public T this[long id]
             {
-                get
-                {
-                    return GetDataRow(id);
-                }
+                get { return GetDataRow(id); }
             }
 
             /// <summary>
@@ -75,10 +66,7 @@ namespace GameFramework.DataTable
             /// </summary>
             public T MinIdDataRow
             {
-                get
-                {
-                    return m_MinIdDataRow;
-                }
+                get { return m_MinIdDataRow; }
             }
 
             /// <summary>
@@ -86,10 +74,7 @@ namespace GameFramework.DataTable
             /// </summary>
             public T MaxIdDataRow
             {
-                get
-                {
-                    return m_MaxIdDataRow;
-                }
+                get { return m_MaxIdDataRow; }
             }
 
             /// <summary>
@@ -97,7 +82,7 @@ namespace GameFramework.DataTable
             /// </summary>
             /// <param name="id">数据表行的编号。</param>
             /// <returns>是否存在数据表行。</returns>
-            public bool HasDataRow(int id)
+            public bool HasDataRow(long id)
             {
                 return m_DataSet.ContainsKey(id);
             }
@@ -114,7 +99,7 @@ namespace GameFramework.DataTable
                     throw new GameFrameworkException("Condition is invalid.");
                 }
 
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     if (condition(dataRow.Value))
                     {
@@ -130,7 +115,7 @@ namespace GameFramework.DataTable
             /// </summary>
             /// <param name="id">数据表行的编号。</param>
             /// <returns>数据表行。</returns>
-            public T GetDataRow(int id)
+            public T GetDataRow(long id)
             {
                 T dataRow = null;
                 if (m_DataSet.TryGetValue(id, out dataRow))
@@ -154,7 +139,7 @@ namespace GameFramework.DataTable
                     throw new GameFrameworkException("Condition is invalid.");
                 }
 
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     if (condition(dataRow.Value))
                     {
@@ -178,7 +163,7 @@ namespace GameFramework.DataTable
                 }
 
                 List<T> results = new List<T>();
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     if (condition(dataRow.Value))
                     {
@@ -207,7 +192,7 @@ namespace GameFramework.DataTable
                 }
 
                 results.Clear();
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     if (condition(dataRow.Value))
                     {
@@ -229,7 +214,7 @@ namespace GameFramework.DataTable
                 }
 
                 List<T> results = new List<T>();
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     results.Add(dataRow.Value);
                 }
@@ -256,7 +241,7 @@ namespace GameFramework.DataTable
                 }
 
                 results.Clear();
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     results.Add(dataRow.Value);
                 }
@@ -283,7 +268,7 @@ namespace GameFramework.DataTable
                 }
 
                 List<T> results = new List<T>();
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     if (condition(dataRow.Value))
                     {
@@ -319,7 +304,7 @@ namespace GameFramework.DataTable
                 }
 
                 results.Clear();
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     if (condition(dataRow.Value))
                     {
@@ -338,7 +323,7 @@ namespace GameFramework.DataTable
             {
                 int index = 0;
                 T[] results = new T[m_DataSet.Count];
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     results[index++] = dataRow.Value;
                 }
@@ -358,7 +343,7 @@ namespace GameFramework.DataTable
                 }
 
                 results.Clear();
-                foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                 {
                     results.Add(dataRow.Value);
                 }
@@ -399,7 +384,7 @@ namespace GameFramework.DataTable
             /// </summary>
             /// <param name="id">要移除数据表行的编号。</param>
             /// <returns>是否移除数据表行成功。</returns>
-            public bool RemoveDataRow(int id)
+            public bool RemoveDataRow(long id)
             {
                 if (!HasDataRow(id))
                 {
@@ -415,7 +400,7 @@ namespace GameFramework.DataTable
                 {
                     m_MinIdDataRow = null;
                     m_MaxIdDataRow = null;
-                    foreach (KeyValuePair<int, T> dataRow in m_DataSet)
+                    foreach (KeyValuePair<long, T> dataRow in m_DataSet)
                     {
                         if (m_MinIdDataRow == null || m_MinIdDataRow.Id > dataRow.Key)
                         {
