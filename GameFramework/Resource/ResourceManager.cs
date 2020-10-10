@@ -1467,7 +1467,7 @@ namespace GameFramework.Resource
             m_AssetInfos.Clear();
             m_ResourceInfos.Clear();
             m_ResourceGroups.Clear();
-            m_ReadWriteResourceInfos.Clear();
+            //m_ReadWriteResourceInfos.Clear();
 
             m_ResourceMode = ResourceMode.Unspecified;
             m_RefuseSetCurrentVariant = false;
