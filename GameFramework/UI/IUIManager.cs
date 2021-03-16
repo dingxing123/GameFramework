@@ -329,6 +329,8 @@ namespace GameFramework.UI
         /// <param name="serialId">要关闭界面的序列编号。</param>
         void CloseUIForm(int serialId);
 
+        void RealCloseUIForm(int serialId, object userData);
+        
         /// <summary>
         /// 关闭界面。
         /// </summary>

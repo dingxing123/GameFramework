@@ -1464,9 +1464,18 @@ namespace GameFramework.Resource
         /// </summary>
         public void Clean()
         {
-            m_AssetInfos.Clear();
-            m_ResourceInfos.Clear();
-            m_ResourceGroups.Clear();
+            if (m_AssetInfos != null)
+            {
+                m_AssetInfos.Clear();
+            }
+            if (m_ResourceInfos != null)
+            {
+                m_ResourceInfos.Clear();
+            }
+            if (m_ResourceGroups != null)
+            {
+                m_ResourceGroups.Clear();
+            }
             //m_ReadWriteResourceInfos.Clear();
 
             m_ResourceMode = ResourceMode.Unspecified;

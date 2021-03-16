@@ -199,7 +199,7 @@ namespace GameFramework
 
             if (!m_EventHandlers.Remove(id, handler))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Event '{0}' not exists specified handler.", id.ToString()));
+                throw new GameFrameworkException(Utility.Text.Format("Event '{0}' [{1} {2}] not exists specified handler.", id.ToString(), handler.Target.ToString(), handler.Method.Name));
             }
         }
 

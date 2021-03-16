@@ -931,7 +931,25 @@ namespace GameFramework.UI
             {
                 throw new GameFrameworkException("UI group is invalid.");
             }
+            
+            
+            uiForm.OnCloseCheck(userData);
+        }
 
+        public void RealCloseUIForm(int serialId,object userData)
+        {
+            IUIForm uiForm = GetUIForm(serialId);
+            if (uiForm == null)
+            {
+                throw new GameFrameworkException(Utility.Text.Format("Can not find UI form '{0}'.", serialId.ToString()));
+            }
+            
+            UIGroup uiGroup = (UIGroup)uiForm.UIGroup;
+            if (uiGroup == null)
+            {
+                throw new GameFrameworkException("UI group is invalid.");
+            }
+            
             uiGroup.RemoveUIForm(uiForm);
             uiForm.OnClose(m_IsShutdown, userData);
             uiGroup.Refresh();
@@ -945,7 +963,7 @@ namespace GameFramework.UI
 
             m_RecycleQueue.Enqueue(uiForm);
         }
-
+        
         /// <summary>
         /// 关闭所有已加载的界面。
         /// </summary>

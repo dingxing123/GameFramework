@@ -108,6 +108,8 @@ namespace GameFramework.UI
         /// <param name="userData">用户自定义数据。</param>
         void OnClose(bool isShutdown, object userData);
 
+        void OnCloseCheck(object userData);
+        
         /// <summary>
         /// 界面暂停。
         /// </summary>
